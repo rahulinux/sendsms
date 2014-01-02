@@ -1,4 +1,4 @@
-#!/usr/bin/evn python 
+#!/usr/bin/env python 
 
 """
 Author          :   Rahul Patil<http://www.linuxian.com>
