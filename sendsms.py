@@ -60,7 +60,6 @@ class	Sms(object):
 	
 if __name__ == '__main__':
 	args = docopt(usage,version='sendsms.py version 0.1 by Rahul Patil<http://linuxian.com>')
-	print(args)
 	username, password, send_to = args['<username>'], args['<password>'], args['<send_to>']
 	text = args['<msg>']
 	sms = Sms(username,password,send_to)
