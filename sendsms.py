@@ -39,6 +39,7 @@ class	Sms(object):
 				'yt0':  'Login',
 				}
 			self.login_status = self.session.post(url, data=login_form)
+			return self.login_status.text
 			
 		def send(self,sms_content):
 			compose_sms_link = 'http://www.indyarocks.com/send-free-sms'
@@ -63,8 +64,13 @@ if __name__ == '__main__':
 	username, password, send_to = args['<username>'], args['<password>'], args['<send_to>']
 	text = args['<msg>']
 	sms = Sms(username,password,send_to)
-	sms.login()
-        status = sms.send(text)
-        if '200' in status:
+	login_status = sms.login()
+	if 'Logout' in login_status:
+		print("Successfully Login with UserID: {0}".format(username))
+	else:	
+		print("Incorrect Username/Passoword")
+		raise SystemExit(1)
+        sms_status = sms.send(text)
+        if '200' in sms_status:
                 print("SMS Successfully Sent to [ {0} ]".format(send_to))
 	sms.logout()
