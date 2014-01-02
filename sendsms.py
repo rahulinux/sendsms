@@ -3,12 +3,12 @@
 """
 Author          :   Rahul Patil<http://www.linuxian.com>
 Purpose         :   Send free sms using www.indyarocks.com
-Date   		:   Thu Jan  2 21:36:00 IST 2014
+Date            :   Thu Jan  2 21:36:00 IST 2014
 Dependencies    :   1. Your number MUST be register with  indyarocks
-		    2. Python 2.7.3 Modules can be install using :
-			- pip install requests
-			- pip install docopt
-Reports Bugs	:   http://github.com/rahulinux/
+                    2. Python 2.7.3 Modules can be install using :
+                         - pip install requests
+                         - pip install docopt
+Reports Bugs	:   https://github.com/rahulinux/sendsms/issues
 """
 from __future__ import print_function
 from docopt import docopt
