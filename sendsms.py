@@ -30,6 +30,7 @@ class	Sms(object):
 			self.password = password
 			self.send_to = send_to
 			self.session = requests.session()
+			
 		def login(self):
 			url = 'http://www.indyarocks.com/login'
 			login_form = {
@@ -38,7 +39,7 @@ class	Sms(object):
 				'yt0':  'Login',
 				}
 			self.login_status = self.session.post(url, data=login_form)
-			open("/tmp/script.log",'w').write(self.login_status.text)
+			
 		def send(self,sms_content):
 			compose_sms_link = 'http://www.indyarocks.com/send-free-sms'
 			send_sms_form = {
@@ -47,8 +48,9 @@ class	Sms(object):
 				'FreeSms[post_message]' : sms_content,
 				'yt0' : 'SEND',
 			}
-			self.sms_status = self.session.post(compose_sms_link, data=send_sms_form)
-			return self.sms_status
+			self.sent_status = self.session.post(compose_sms_link, data=send_sms_form)
+                        return self.sent_status.text
+
 		def logout(self):
 			logout_link = 'http://www.indyarocks.com/logout'
 			self.session.post(logout_link)
@@ -63,5 +65,7 @@ if __name__ == '__main__':
 	text = args['<msg>']
 	sms = Sms(username,password,send_to)
 	sms.login()
-	sms.send(text)
+        status = sms.send(text)
+        if '200' in status:
+                print("SMS Successfully Sent to [ {0} ]".format(send_to))
 	sms.logout()
