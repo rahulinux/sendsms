@@ -23,6 +23,7 @@ Usage:
 Note: if your password or message have special character then use double quotes 
 """
 
+
 class	Sms(object):
 		"""for login and send sms and logout """
 		def __init__(self,username,password,send_to):
@@ -30,6 +31,8 @@ class	Sms(object):
 			self.password = password
 			self.send_to = send_to
 			self.session = requests.session()
+			self.session.headers.pop('User-Agent')
+			self.session.headers['User-Agent'] = 'Mozilla/5.0 Firefox/0.8'
 			
 		def login(self):
 			url = 'http://www.indyarocks.com/login'
@@ -50,7 +53,7 @@ class	Sms(object):
 				'yt0' : 'SEND',
 			}
 			self.sent_status = self.session.post(compose_sms_link, data=send_sms_form)
-                        return self.sent_status.text
+                        return self.sent_status
 
 		def logout(self):
 			logout_link = 'http://www.indyarocks.com/logout'
@@ -63,6 +66,7 @@ if __name__ == '__main__':
 	args = docopt(usage,version='sendsms.py version 0.1 by Rahul Patil<http://linuxian.com>')
 	username, password, send_to = args['<username>'], args['<password>'], args['<send_to>']
 	text = args['<msg>']
+	#raise SystemExit(1)
 	sms = Sms(username,password,send_to)
 	login_status = sms.login()
 	if 'Logout' in login_status:
@@ -71,6 +75,11 @@ if __name__ == '__main__':
 		print("Incorrect Username/Passoword")
 		raise SystemExit(1)
         sms_status = sms.send(text)
-        if '200' in sms_status:
-                print("SMS Successfully Sent to [ {0} ]".format(send_to))
+	print(sms_status.request.headers)
+	msg = 'Your Message has been sent successfully'
+        if msg in sms_status.text:
+                print("{0} [ {1} ]".format(msg,send_to))
+	else:
+		print('Error! Too many SMS-es sent')
+		print('Per Day only 100 SMS-es allowed')
 	sms.logout()
