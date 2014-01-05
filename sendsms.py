@@ -59,27 +59,28 @@ class	Sms(object):
 			logout_link = 'http://www.indyarocks.com/logout'
 			self.session.post(logout_link)
 			
-			
+
+def main():
+	sms = Sms(username,password,send_to)
+	login_status = sms.login()
+	if 'Logout' in login_status:
+		print("Successfully Login with UserID: {}".format(username))
+	else:	
+		print("Incorrect Username/Passoword")
+		raise SystemExit(1)
+        sms_status = sms.send(text)
+	msg = 'Your Message has been sent successfully'
+	sms_error = 'Error! Too many SMS-es sent'
+        if msg in sms_status.text:
+                print("{} [ {} ]".format(msg,send_to))
+	else:
+		print(sms_error if sms_error in sms_status.text else "" )
+		print('Somethng is bad\nPer Day only 100 SMS-es allowed')
+	sms.logout()
 			
 	
 if __name__ == '__main__':
 	args = docopt(usage,version='sendsms.py version 0.1 by Rahul Patil<http://linuxian.com>')
 	username, password, send_to = args['<username>'], args['<password>'], args['<send_to>']
 	text = args['<msg>']
-	#raise SystemExit(1)
-	sms = Sms(username,password,send_to)
-	login_status = sms.login()
-	if 'Logout' in login_status:
-		print("Successfully Login with UserID: {0}".format(username))
-	else:	
-		print("Incorrect Username/Passoword")
-		raise SystemExit(1)
-        sms_status = sms.send(text)
-	print(sms_status.request.headers)
-	msg = 'Your Message has been sent successfully'
-        if msg in sms_status.text:
-                print("{0} [ {1} ]".format(msg,send_to))
-	else:
-		print('Error! Too many SMS-es sent')
-		print('Per Day only 100 SMS-es allowed')
-	sms.logout()
+	main()
