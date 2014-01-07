@@ -49,7 +49,7 @@ class	Sms(object):
 			send_sms_form = {
 				'freeSmschkmemberVal' : 'NM',
 				'FreeSms[mobile]' : self.send_to,
-				'FreeSms[post_message]' : sms_content,
+				'FreeSms[post_message]' : sms_content.decode('string_escape'),
 				'yt0' : 'SEND',
 			}
 			self.sent_status = self.session.post(compose_sms_link, data=send_sms_form)
