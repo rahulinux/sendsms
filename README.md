@@ -18,6 +18,9 @@ chmod +x sendsms.py
 ./sendsms.py -u username -p 'password' -to 90299186xx -m "Happy Bday bro!!"
 ````
 
+# Limitation 
+  - It will work only in India
+  - Only 100 SMS-es are allowed , it's restricted by Indyarocks .
 
 # Contribute
 Report issues on [github issue page](https://github.com/rahulinux/sendsms/issues) or fork the project (let me know if you do).
