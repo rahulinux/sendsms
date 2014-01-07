@@ -20,7 +20,7 @@ chmod +x sendsms.py
 
 # Limitation 
   - It will work only in India
-  - Only 100 SMS-es are allowed , it's restricted by Indyarocks .
+  - Only 100 SMS-es are allowed per day , it's restricted by Indyarocks .
 
 # Contribute
 Report issues on [github issue page](https://github.com/rahulinux/sendsms/issues) or fork the project (let me know if you do).
