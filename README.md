@@ -1,7 +1,7 @@
 SendSMS
 =======
 
-# Why this kolaveri di ?
+# Why ?
 Send SMS from command line via indyarocks free sms service 
 
 # Prerequisites
