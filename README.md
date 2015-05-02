@@ -1,6 +1,8 @@
 SendSMS
 =======
 
+# This project is dead
+
 # Why ?
 Send SMS from command line via indyarocks free sms service 
 
